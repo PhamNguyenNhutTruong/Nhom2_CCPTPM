@@ -77,7 +77,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpGet("getMatchById")]
-        //[Authorize(Roles = "fullpermisson")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> GetMatch(string Id)
         {
             try
@@ -91,6 +91,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpGet("getMatch")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> GetMatch()
         {
             try
@@ -105,7 +106,8 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpPost("addMatch")]
-       
+        [Authorize(Roles = "Write")]
+
         public async Task<IActionResult> AddMatch([FromBody] MatchInfo matchInfo)
         {
             try
@@ -120,7 +122,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpDelete("deleteMatch/{matchId}")]
-       
+        [Authorize(Roles = "Write")]
         public async Task<IActionResult> DeleteMatch(string matchId)
         {
             try
@@ -135,7 +137,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpDelete("deleteHighlight/{id}")]
-       
+        [Authorize(Roles = "Write")]
         public async Task<IActionResult> DeleteHighlight(string id)
         {
             try
@@ -150,7 +152,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpGet("getHighlight")]
-       
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> GeHighligth()
         {
             try
@@ -164,7 +166,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpGet("getHighlightOfMatch/{matchId}")]
-       
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> GeHighligthOfMatch(string matchId)
         {
             try
@@ -178,7 +180,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpGet("getHighlightHL")]
-        
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> GeHighligthHL()
         {
             try
@@ -194,6 +196,7 @@ namespace video_editing_api.Controllers
 
 
         [HttpPost("concatHighlight")]
+        [Authorize(Roles = "Write")]
         public async Task<IActionResult> ConcatVideo(ConcatModel concatModel)
         {
             try
@@ -207,6 +210,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpPost("notConcatHighlight")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> NotConcatVideo(ConcatModel concatModel)
         {
             try
@@ -237,6 +241,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpPost("uploadJson/{matchId}")]
+        [Authorize(Roles = "Write")]
         public async Task<IActionResult> UploadJson(string matchId, IFormFile jsonfile)
         {
             try
@@ -252,6 +257,7 @@ namespace video_editing_api.Controllers
 
 
         [HttpGet("getTag")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> getTag()
         {
             try
@@ -266,6 +272,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpGet("getTeam")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> getTeam(string leagueId)
         {
             try
@@ -294,6 +301,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpPost("getJsonFromTag")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> getJsonFromTag(HighlightFilterByTagRequest request)
         {
             try
@@ -308,6 +316,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpPost("download")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> downloadone(ConcatModel concatModel)
         {
             try
@@ -340,6 +349,7 @@ namespace video_editing_api.Controllers
 
 
         [HttpPost("updateAll/{matchId}")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> updateLogTrimmedAll(string matchId, int selected)
         {
             try
@@ -373,6 +383,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpGet("getGallery")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> getGallery(int type)
         {
             try
@@ -387,6 +398,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpDelete("deleteGallery/{id}")]
+        [Authorize(Roles = "Read,Write")]
         public async Task<IActionResult> deleteGallery(string id)
         {
             try

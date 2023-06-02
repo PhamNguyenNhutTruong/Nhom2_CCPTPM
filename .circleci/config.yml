@@ -1,29 +1,27 @@
-
 version: 2.1
-
 jobs:
   build:
     docker:
-      - image: docker:stable-git
-
+      - image: docker:latest
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install dependencies
+          name: Build and push API image
           command: |
-            apk add --update --no-cache docker-compose
+            docker build -t anhhoang2910/api:latest ./server/video-editing-api
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker push anhhoang2910/api:latest
       - run:
-          name: Build and test
+          name: Build and push frontend image
           command: |
-            docker-compose build
-            docker-compose up -d
-            docker-compose exec api pytest
-      - run:
-          name: Stop services
-          command: docker-compose down
+            docker build -t anhhoang2910/frontend:latest ./client
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker push anhhoang2910/frontend:latest
 workflows:
-  version: 2.0
-  build-and-test:
+  build-and-publish:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master

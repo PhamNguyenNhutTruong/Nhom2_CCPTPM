@@ -20,6 +20,7 @@ namespace video_editing_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         private readonly RoleManager<AppRole> _roleManager;
@@ -31,6 +32,7 @@ namespace video_editing_api.Controllers
             _userManager = userManager;
         }
         [HttpGet("GetAllRoles")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllRoles()
         {
             try
@@ -54,6 +56,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpPost("CreateRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRole(string roleName)
         {
             var role = new AppRole { Name = roleName };
@@ -70,7 +73,7 @@ namespace video_editing_api.Controllers
         }
 
         [HttpPost("AddRole/{userId}/{roleName}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole(string userId, string roleName)
         {
             try
@@ -107,7 +110,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpDelete("RemoveRole/{userId}/{roleName}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveRole(string userId, string roleName)
         {
             try
@@ -136,7 +139,7 @@ namespace video_editing_api.Controllers
             }
         }
         [HttpPut("UpdateRole/{userId}/{oldRoleName}/{newRoleName}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateRole(string userId, string oldRoleName, string newRoleName)
         {
             try
